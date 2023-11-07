@@ -3,3 +3,7 @@ INSERT INTO animals VALUES
 (2,'Gabumon',DATE '2018-11-15',2,true,8),
 (3,'Pikachu',DATE '2021-01-07',1,false,15.04),
 (4,'Devimon',DATE '2017-05-12',5,true,11);
+
+-- add species column
+ALTER TABLE animals
+ADD COLUMN species varchar(255);
