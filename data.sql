@@ -4,9 +4,6 @@ INSERT INTO animals VALUES
 (3,'Pikachu',DATE '2021-01-07',1,false,15.04),
 (4,'Devimon',DATE '2017-05-12',5,true,11);
 
--- add species column
-ALTER TABLE animals
-ADD COLUMN species varchar(255);
 
 -- Insert new animals data
 INSERT INTO animals (id, name, date_of_birth, escape_attempts, neutered, weight_kg)
