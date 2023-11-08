@@ -52,6 +52,7 @@ SET species = 'unspecified';
 -- Verify that change was made. Then roll back the change and verify that the species columns went back to the state before the transaction.
 SELECT * FROM animals; -- species column = unspecified
 ROLLBACK;
+SELECT * FROM animals -- species column = null
 
 --Inside a transaction: Update the animals table by setting the species column to digimon for all animals that have a name ending in mon. Update the animals table by setting the species column to pokemon for all animals that don't have species already set.
 
@@ -69,6 +70,8 @@ WHERE species IS NULL;
 
 COMMIT;
 
+SELECT * FROM animals;
+
 -- Inside a transaction delete all records in the animals table, then roll back the transaction.
 
 BEGIN;
@@ -76,8 +79,14 @@ BEGIN;
 -- Delete all records in the animals table
 DELETE FROM animals;
 
+SELECT * FROM animals;
+
+
 -- Roll back the transaction to undo the deletion
 ROLLBACK;
+
+SELECT * FROM animals;
+
 
 
 -- Inside a transaction: Delete all animals born after Jan 1st, 2022.Create a savepoint for the transaction.Update all animals' weight to be their weight multiplied by -1. Rollback to the savepoint Update all animals' weights that are negative to be their weight ultiplied by -1. Commit transaction
