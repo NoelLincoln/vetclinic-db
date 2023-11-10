@@ -69,3 +69,54 @@ UPDATE animals
 SET owner_id = (SELECT id FROM owners WHERE full_name = 'Dean Winchester')
 WHERE name IN ('Angemon', 'Boarmon');
 
+
+-- add data to vets table
+INSERT INTO vets (name, age, date_of_graduation)
+VALUES
+    ('William Tatcher', 45, '2000-04-23'),
+    ('Maisy Smith', 26, '2019-01-17'),
+    ('Stephanie Mendez', 64, '1981-05-04'),
+    ('Jack Harkness', 38, '2008-06-08');
+
+
+-- Insert data for specializations
+INSERT INTO specializations (vet_id, species_id)
+VALUES
+    -- Vet William Tatcher specialized in Pokemon
+    ((SELECT id FROM vets WHERE name = 'William Tatcher'), (SELECT id FROM species WHERE name = 'Pokemon')),
+
+    -- Vet Stephanie Mendez specialized in Digimon and Pokemon
+    ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM species WHERE name = 'Digimon')),
+    ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM species WHERE name = 'Pokemon')),
+
+    -- Vet Jack Harkness specialized in Digimon
+    ((SELECT id FROM vets WHERE name = 'Jack Harkness'), (SELECT id FROM species WHERE name = 'Digimon'));
+
+--insert data for visits 
+-- Assuming you know the animal_id and vet_id values for the animals and vets
+-- Insert data for visits
+INSERT INTO visits (animal_id, vet_id, visit_date)
+VALUES
+    -- Agumon visited William Tatcher on May 24th, 2020.
+    ((SELECT id FROM animals WHERE name = 'Agumon'), (SELECT id FROM vets WHERE name = 'William Tatcher'), '2020-05-24'),
+
+    -- Agumon visited Stephanie Mendez on Jul 22th, 2020.
+    ((SELECT id FROM animals WHERE name = 'Agumon'), (SELECT id FROM vets WHERE name = 'Stephanie Mendez'), '2020-07-22'),
+
+    -- Gabumon visited Jack Harkness on Feb 2nd, 2021.
+    ((SELECT id FROM animals WHERE name = 'Gabumon'), (SELECT id FROM vets WHERE name = 'Jack Harkness'), '2021-02-02'),
+
+    -- Pikachu visited Maisy Smith on Jan 5th, 2020.
+    ((SELECT id FROM animals WHERE name = 'Pikachu'), (SELECT id FROM vets WHERE name = 'Maisy Smith'), '2020-01-05'),
+
+    -- Pikachu visited Maisy Smith on Mar 8th, 2020.
+    ((SELECT id FROM animals WHERE name = 'Pikachu'), (SELECT id FROM vets WHERE name = 'Maisy Smith'), '2020-03-08'),
+
+    -- Pikachu visited Maisy Smith on May 14th, 2020.
+    ((SELECT id FROM animals WHERE name = 'Pikachu'), (SELECT id FROM vets WHERE name = 'Maisy Smith'), '2020-05-14'),
+
+    -- Continue with the remaining visits...
+    -- ...
+
+    -- Blossom visited William Tatcher on Jan 11th, 2021.
+    ((SELECT id FROM animals WHERE name = 'Blossom'), (SELECT id FROM vets WHERE name = 'William Tatcher'), '2021-01-11');
